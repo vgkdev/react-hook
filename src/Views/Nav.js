@@ -1,10 +1,10 @@
 import React from "react";
-import "./Nav.css";
+import "./Nav.scss";
 
 const Nav = () => {
   return (
-    <div class="topnav">
-      <a class="active" href="#home">
+    <div className="topnav">
+      <a className="active" href="#home">
         Home
       </a>
       <a href="#news">News</a>
