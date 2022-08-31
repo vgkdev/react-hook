@@ -6,9 +6,20 @@ import Nav from "./Views/Nav";
 function App() {
   const [name, setName] = useState("VGK");
   const [address, setAddress] = useState("");
+  const [todos, setTodos] = useState([
+    { id: "todo1", title: "code" },
+    { id: "todo2", title: "play game" },
+    { id: "todo3", title: "eat" },
+  ]);
 
   const handleEventClick = (event) => {
-    setName(address); //async
+    if (!address) {
+      alert("empty input");
+      return;
+    }
+    let newTodo = { id: "abc", title: address };
+    setTodos([...todos, newTodo]);
+    setAddress("");
   };
 
   const handleOnChangeInput = (event) => {
@@ -21,6 +32,16 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Hello world - {name}</h1>
+        <div className="todo-container">
+          {todos.map((todo) => {
+            console.log("check todo list", todo);
+            return (
+              <li className="todo-child" key={todo.id}>
+                {todo.title}
+              </li>
+            );
+          })}
+        </div>
         <input
           type="text"
           value={address}
