@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Nav from "./Views/Nav";
+import Todo from "./Views/Todo";
 
 function App() {
   const [name, setName] = useState("VGK");
@@ -32,16 +33,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Hello world - {name}</h1>
-        <div className="todo-container">
-          {todos.map((todo) => {
-            console.log("check todo list", todo);
-            return (
-              <li className="todo-child" key={todo.id}>
-                {todo.title}
-              </li>
-            );
-          })}
-        </div>
+        <Todo todos={todos} />
         <input
           type="text"
           value={address}
