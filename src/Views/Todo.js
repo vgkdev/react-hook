@@ -4,6 +4,9 @@ const Todo = (props) => {
   const todos = props.todos;
   return (
     <div className="todo-container">
+      <div className="todo-container" style={{ color: "red" }}>
+        {props.title}
+      </div>
       {todos.map((todo) => {
         console.log("check todo list", todo);
         return (
@@ -12,6 +15,8 @@ const Todo = (props) => {
           </li>
         );
       })}
+
+      <hr />
     </div>
   );
 };
