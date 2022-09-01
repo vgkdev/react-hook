@@ -19,7 +19,11 @@ function App() {
       alert("empty input");
       return;
     }
-    let newTodo = { id: "abc", title: address, type: "Khang" };
+    let newTodo = {
+      id: Math.floor(Math.random() * 10000 + 1),
+      title: address,
+      type: "Khang",
+    };
     setTodos([...todos, newTodo]);
     setAddress("");
   };
@@ -28,13 +32,23 @@ function App() {
     setAddress(event.target.value);
   };
 
+  const deleteDataTodo = (id) => {
+    let changeTodo = todos;
+    changeTodo = changeTodo.filter((item) => item.id !== id);
+    setTodos(changeTodo);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <Nav />
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Hello world - {name}</h1>
-        <Todo todos={todos} title={"All todos"} />
+        <Todo
+          todos={todos}
+          title={"All todos"}
+          deleteDataTodo={deleteDataTodo}
+        />
         <Todo
           todos={todos.filter((item) => item.type === "Khang")}
           title={"Khang's todos"}
@@ -45,7 +59,7 @@ function App() {
           onChange={(event) => handleOnChangeInput(event)}
         />
         <button type="button" onClick={(event) => handleEventClick(event)}>
-          click me
+          Add
         </button>
       </header>
     </div>

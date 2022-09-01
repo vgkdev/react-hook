@@ -1,18 +1,24 @@
 import React from "react";
 
 const Todo = (props) => {
-  const todos = props.todos;
+  const { todos, title, deleteDataTodo } = props;
+
+  const handleDelete = (id) => {
+    deleteDataTodo(id);
+  };
   return (
     <div className="todo-container">
       <div className="todo-container" style={{ color: "red" }}>
-        {props.title}
+        {title}
       </div>
       {todos.map((todo) => {
-        console.log("check todo list", todo);
         return (
-          <li className="todo-child" key={todo.id}>
-            {todo.title}
-          </li>
+          <div key={todo.id}>
+            <li className="todo-child">
+              {todo.title}{" "}
+              <button onClick={() => handleDelete(todo.id)}>x</button>
+            </li>
+          </div>
         );
       })}
 
