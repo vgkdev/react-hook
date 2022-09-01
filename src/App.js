@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Nav from "./Views/Nav";
@@ -13,6 +13,14 @@ function App() {
     { id: "todo3", title: "eat", type: "Khang" },
     { id: "todo4", title: "sleep", type: "Quyen" },
   ]);
+
+  useEffect(() => {
+    console.log("run use effect: address");
+  }, [address]); //[] === didmount - only re-run if address is changed
+
+  useEffect(() => {
+    console.log("run use effect: todos");
+  }, [todos]); //on;y re-run if todos is changed
 
   const handleEventClick = (event) => {
     if (!address) {
