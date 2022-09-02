@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Nav from "./Views/Nav";
 import Todo from "./Views/Todo";
+import Covid from "./Views/Covid";
 
 function App() {
   const [name, setName] = useState("VGK");
@@ -52,7 +53,10 @@ function App() {
         <Nav />
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Hello world - {name}</h1>
-        <Todo
+
+        <Covid />
+
+        {/* <Todo
           todos={todos}
           title={"All todos"}
           deleteDataTodo={deleteDataTodo}
@@ -68,7 +72,7 @@ function App() {
         />
         <button type="button" onClick={(event) => handleEventClick(event)}>
           Add
-        </button>
+        </button> */}
       </header>
     </div>
   );
