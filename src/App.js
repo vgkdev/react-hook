@@ -4,9 +4,9 @@ import "./App.css";
 import Nav from "./Views/Nav";
 import Todo from "./Views/Todo";
 import Covid from "./Views/Covid";
+import { Countdown, NewCountDown } from "./Views/Countdown";
 
 function App() {
-  const [name, setName] = useState("VGK");
   const [address, setAddress] = useState("");
   const [todos, setTodos] = useState([
     { id: "todo1", title: "code", type: "Khang" },
@@ -47,12 +47,20 @@ function App() {
     setTodos(changeTodo);
   };
 
+  const onTimesUp = () => {
+    alert("Times up");
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <Nav />
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello world - {name}</h1>
+        <h1>Hello world</h1>
+
+        <Countdown onTimesUp={onTimesUp} />
+        <span>--------------</span>
+        <NewCountDown onTimesUp={onTimesUp} />
 
         <Covid />
 
