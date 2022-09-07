@@ -6,6 +6,8 @@ import Todo from "./Views/Todo";
 import Covid from "./Views/Covid";
 import { Countdown, NewCountDown } from "./Views/Countdown";
 
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 function App() {
   const [address, setAddress] = useState("");
   const [todos, setTodos] = useState([
@@ -52,37 +54,42 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Nav />
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello world</h1>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Nav />
+          <img src={logo} className="App-logo" alt="logo" />
+        </header>
 
-        <Countdown onTimesUp={onTimesUp} />
-        <span>--------------</span>
-        <NewCountDown onTimesUp={onTimesUp} />
+        <Switch>
+          <Route path="/" exact>
+            {/* exact = {true} */}
+            <Covid />
+          </Route>
+          <Route path="/timer">
+            <Countdown onTimesUp={onTimesUp} />
+            <span>--------------</span>
+            <NewCountDown onTimesUp={onTimesUp} />
+          </Route>
+          <Route path="/todo">
+            <Todo
+              todos={todos}
+              title={"All todos"}
+              deleteDataTodo={deleteDataTodo}
+            />
 
-        <Covid />
-
-        {/* <Todo
-          todos={todos}
-          title={"All todos"}
-          deleteDataTodo={deleteDataTodo}
-        />
-        <Todo
-          todos={todos.filter((item) => item.type === "Khang")}
-          title={"Khang's todos"}
-        />
-        <input
-          type="text"
-          value={address}
-          onChange={(event) => handleOnChangeInput(event)}
-        />
-        <button type="button" onClick={(event) => handleEventClick(event)}>
-          Add
-        </button> */}
-      </header>
-    </div>
+            <input
+              type="text"
+              value={address}
+              onChange={(event) => handleOnChangeInput(event)}
+            />
+            <button type="button" onClick={(event) => handleEventClick(event)}>
+              Add
+            </button>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
