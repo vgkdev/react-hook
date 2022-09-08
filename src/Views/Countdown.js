@@ -5,6 +5,12 @@ class Countdown extends Component {
     count: 10,
   };
 
+  componentWillUnmount() {
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+  }
+
   componentDidMount() {
     // setTimeout(() => {
     //   console.log("ok");
