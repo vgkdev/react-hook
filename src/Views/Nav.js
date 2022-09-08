@@ -8,12 +8,19 @@ const Nav = () => {
       <NavLink activeClassName="active" to="/" exact>
         Home
       </NavLink>
+
       <NavLink activeClassName="active" to="/timer">
         Timer App
       </NavLink>
+
       <NavLink activeClassName="active" to="/todo">
         Todo App
       </NavLink>
+
+      <NavLink activeClassName="active" to="/blog">
+        Blog App
+      </NavLink>
+
       <NavLink activeClassName="active" to="/secret">
         Secret
       </NavLink>

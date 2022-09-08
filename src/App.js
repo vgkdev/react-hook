@@ -5,6 +5,8 @@ import Nav from "./Views/Nav";
 import Todo from "./Views/Todo";
 import Covid from "./Views/Covid";
 import { Countdown, NewCountDown } from "./Views/Countdown";
+import Blog from "./Views/Blog";
+import DetailBlog from "./Views/DetailBlog";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -18,11 +20,11 @@ function App() {
   ]);
 
   useEffect(() => {
-    console.log("run use effect: address");
+    //console.log("run use effect: address");
   }, [address]); //[] === didmount - only re-run if address is changed
 
   useEffect(() => {
-    console.log("run use effect: todos");
+    //console.log("run use effect: todos");
   }, [todos]); //on;y re-run if todos is changed
 
   const handleEventClick = (event) => {
@@ -86,6 +88,14 @@ function App() {
             <button type="button" onClick={(event) => handleEventClick(event)}>
               Add
             </button>
+          </Route>
+
+          <Route path="/blog" exact>
+            <Blog />
+          </Route>
+
+          <Route path={"/blog/:id"}>
+            <DetailBlog />
           </Route>
         </Switch>
       </div>
