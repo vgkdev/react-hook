@@ -1,9 +1,20 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const DetailBlog = () => {
+  let history = useHistory();
   let { id } = useParams();
-  return <div>DetailBlog with id = {id}</div>;
+
+  const handleBackData = () => {
+    history.push("/blog");
+  };
+
+  return (
+    <>
+      <button onClick={handleBackData}>{"<--"} Back</button>
+      <div>DetailBlog with id = {id}</div>
+    </>
+  );
 };
 
 export default DetailBlog;
