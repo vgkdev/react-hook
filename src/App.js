@@ -7,6 +7,7 @@ import Covid from "./Views/Covid";
 import { Countdown, NewCountDown } from "./Views/Countdown";
 import Blog from "./Views/Blog";
 import DetailBlog from "./Views/DetailBlog";
+import AddNewBlog from "./Views/AddNewBlog";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -96,6 +97,10 @@ function App() {
 
           <Route path={"/blog/:id"}>
             <DetailBlog />
+          </Route>
+
+          <Route path={"/add-new-blog"}>
+            <AddNewBlog />
           </Route>
         </Switch>
       </div>
