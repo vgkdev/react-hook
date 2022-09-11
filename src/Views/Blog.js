@@ -1,34 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useFetch from "../custom/fetch";
 import "./Blog.scss";
 import { Link, useHistory } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import AddNewBlog from "./AddNewBlog";
 
 const Blog = () => {
-  let history = useHistory();
+  const [newData, setNewData] = useState([]);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const {
     data: dataBlogs,
     isLoading,
     isError,
   } = useFetch("https://jsonplaceholder.typicode.com/posts", false);
 
-  let newData = [];
+  useEffect(() => {
+    if (dataBlogs && dataBlogs.length > 0) {
+      let takeData = dataBlogs.slice(0, 10);
+      setNewData(takeData);
+    }
+  }, [dataBlogs]);
 
-  if (dataBlogs && dataBlogs.length > 0) {
-    newData = dataBlogs.slice(0, 10);
-    console.log("check newData: ", newData);
-  }
+  const handleAddNew = (blog) => {
+    let tempData = newData;
+    tempData.unshift(blog);
+    setShow(false);
+    setNewData(tempData);
+  };
 
-  const handleAddNew = () => {
-    history.push("/add-new-blog");
-  }; // or use Link - react router dom
+  const deletePost = (id) => {
+    let tempData = newData;
+    tempData = tempData.filter((item) => item.id !== id);
+    setNewData(tempData);
+  };
 
   return (
     <>
-      <div>
-        <button onClick={handleAddNew} className="btn-add-new-blog">
-          + Add new blog
-        </button>
-      </div>
+      <Button variant="primary" className="my-3" onClick={handleShow}>
+        + Add new blog
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add New Blog</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <AddNewBlog handleAddNew={handleAddNew} />
+        </Modal.Body>
+      </Modal>
+
       <div className="blogs-container">
         {isLoading === false &&
           newData &&
@@ -36,7 +61,16 @@ const Blog = () => {
           newData.map((item) => {
             return (
               <div className="single-blog" key={item.id}>
-                <div className="title">{item.title}</div>
+                <div className="title">
+                  <span>{item.title}</span>
+                  <button
+                    className="btn-delete"
+                    onClick={() => deletePost(item.id)}
+                    // () => {} nó sẽ không tham chiếu tới func khi chuyền tham số
+                  >
+                    x
+                  </button>
+                </div>
                 <div className="content">{item.body}</div>
                 <button>
                   <Link to={`/blog/${item.id}`}>View detail</Link>
