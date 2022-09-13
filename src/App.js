@@ -8,6 +8,7 @@ import { Countdown, NewCountDown } from "./Views/Countdown";
 import Blog from "./Views/Blog";
 import DetailBlog from "./Views/DetailBlog";
 import AddNewBlog from "./Views/AddNewBlog";
+import NotFound from "./Views/NotFound";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -101,6 +102,10 @@ function App() {
 
           <Route path={"/add-new-blog"}>
             <AddNewBlog />
+          </Route>
+
+          <Route path="*">
+            <NotFound />
           </Route>
         </Switch>
       </div>
